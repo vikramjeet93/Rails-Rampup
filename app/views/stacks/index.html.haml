@@ -1,0 +1,17 @@
+%h1 Dashboard
+%h2 Inventory List
+%li= link_to('Create Inventory', new_stack_path)
+%table{:border => "1"}
+  %tr
+    %th Name
+    %th Description
+    %th Owner/Member
+  - @stacks.each do |stack|
+    %tr
+      %td= link_to(stack.name, stack_path(stack))
+      %td= stack.description
+      %td
+        - if stack.owner_id == current_user.id
+          Owner
+        - else
+          Member

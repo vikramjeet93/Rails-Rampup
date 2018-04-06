@@ -1,0 +1,8 @@
+%h1 Inventory Details
+%h3 Inventory Name: #{@stack.name}
+
+- if @stack.owner_id == current_user.id
+  %li= link_to('Edit Inventory', edit_stack_path)
+
+%li= link_to('Add Item', new_stack_item_path(@stack))
+%li Link to provision Item

@@ -1,0 +1,35 @@
+= form_with model: @stack, local: true do |form|
+  - if @stack.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@stack.errors.count, "error")
+        prohibited
+        this article from being saved:
+      %ul
+        - @stack.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = form.label :name
+    %br/
+    = form.text_field :name
+
+  .field
+    = form.label :description
+    %br/
+    = form.text_field :description
+
+  .field
+    = select_tag(                                                                              |
+          "user_ids[]",                                                                        |
+          options_for_select(                                                                  |
+              User.where.not(id: current_user.id).collect {|user| [user.first_name, user.id]}, |
+              @stack.users.collect {|user| user.id}                                            |
+          ),                                                                                   |
+          {                                                                                    |
+              :multiple => true,                                                               |
+              :size => 6                                                                       |
+          }                                                                                    |
+      )                                                                                        |
+  %div
+    = form.submit

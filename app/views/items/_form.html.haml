@@ -1,0 +1,24 @@
+= form_with(model: [@stack, @stack.items.build]) do |form|
+
+  .field
+    = form.label :name
+    %br/
+    = form.text_field :name
+
+  .field
+    = form.label :description
+    %br/
+    = form.text_area :description
+
+  .field
+    = form.label :returnable
+    %br/
+    = form.check_box :returnable
+
+  .field
+    = form.label :quantity
+    %br/
+    = form.number_field :quantity
+
+  .field
+    = form.submit
